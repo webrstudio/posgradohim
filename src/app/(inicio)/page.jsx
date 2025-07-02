@@ -1,8 +1,8 @@
+import { Options } from "./components/home";
+
 export default function () {
     return (
-        <div>
-            Pre y posgrado
-        </div>
+        <Options />
     )
 }
 export const metadata = {
