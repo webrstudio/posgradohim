@@ -1,0 +1,9 @@
+.footerWrapper{
+    align-items: center;
+    background:var(--red-primary);
+    color:var(--white-primary);
+    display:flex;
+    justify-content: center;
+    padding:1rem 0;
+    text-align: center;
+}

@@ -1,0 +1,24 @@
+.headerWrapper{
+    background: var(--red-primary);
+    padding:1rem 0;
+}
+.navList{
+    display:flex;
+    list-style: none;
+}
+.navList a{
+    color:var(--white-primary);
+    text-decoration:none;
+}
+.navLogo{
+    align-items: center;
+    display:flex;
+}
+.navWrapper{
+    align-items: center;
+    display:flex;
+    justify-content: space-between;
+}
+.navWrapper img{
+    width:7rem;
+}
