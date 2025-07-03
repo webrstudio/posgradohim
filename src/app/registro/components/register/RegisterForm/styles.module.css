@@ -1,0 +1,36 @@
+.registerFormWrapper{
+    display:grid;
+    gap:1.5rem;
+    grid-template-columns: repeat(2,1fr);
+    padding:1rem;
+}
+.registerFormWrapper button{
+    border:none;
+    cursor:pointer;
+    padding:0.5rem;
+    width:100%;
+}
+.registerFormWrapper div {
+    align-items: center;
+    display:flex;
+    gap:0.5rem;
+    width:100%;
+}
+.registerFormWrapper input{
+    width:100%;
+}
+.registerFormWrapper label{
+    width:100%;
+}
+.registerFormWrapper select{
+    text-align: center;
+    width:100%;
+}
+.successButton{
+    background: var(--green-primary);
+    color:var(--white-primary);
+}
+.deleteButton{
+  background: var(--red-primary);
+  color:var(--white-primary);  
+}
