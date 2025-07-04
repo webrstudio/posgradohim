@@ -1,3 +1,8 @@
+'use client'
+import 'animate.css'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import { useOnChange } from '@/hooks'
 import styles from './styles.module.css'
 
 export const RegisterForm = ({ id }) => {
@@ -14,106 +19,230 @@ export const RegisterForm = ({ id }) => {
 }
 
 const SocialServiceForm = ({ id }) => {
+    const { data, onChange, onReset } = useOnChange()
     return (
-        <form className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}>
+        <form
+            className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}
+            onSubmit={(e) => onSubmit(e, {
+                data: {
+                    ...data,
+                    categoria_id: id === 'servicio-social' ? 2 : 1
+                }
+            })}
+        >
             <div>
                 <label>Área o departamento:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_departamento'
+                    onChange={onChange}
+                    required
+                />
             </div>
             <div>
                 <label>Fecha de inicio:</label>
-                <input type='date' name='' required />
+                <input
+                    type='date'
+                    name='estudiante_fecha_inicio'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Fecha de término:</label>
-                <input type='date' name='' required />
+                <input
+                    type='date'
+                    name='estudiante_fecha_termino'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Nombre:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_nombre'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Edad:</label>
-                <input type='number' name='' required />
+                <input
+                    type='number'
+                    name='estudiante_edad'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Sexo:</label>
-                <select>
-                    <option>Hombre</option>
-                    <option>Mujer</option>
+                <select name='estudiante_genero' onChange={onChange}>
+                    <option value='Hombre'>Hombre</option>
+                    <option value='Mujer'>Mujer</option>
                 </select>
             </div>
             <div>
                 <label>Estado civil:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_estado_civil'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Fecha de nacimiento:</label>
-                <input type='date' name='' required />
+                <input
+                    type='date'
+                    name='estudiante_fecha_nacimiento'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>CURP:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_curp'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Domicilio donde radica en la ciudad:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_domicilio_temporal'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Domicilio permanente:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_domicilio_permanente'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Código postal:</label>
-                <input type='number' name='' required />
+                <input
+                    type='number'
+                    name='estudiante_cp'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Alcaldía o municipio:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_alcaldia'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Ciudad:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_ciudad'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>País:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_pais'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Teléfono particular:</label>
-                <input type='number' name='' required />
+                <input
+                    type='number'
+                    name='estudiante_telefono_particular'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Teléfono celular:</label>
-                <input type='number' name='' required />
+                <input
+                    type='number'
+                    name='estudiante_telefono_celular'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Correo electrónico:</label>
-                <input type='email' name='' required />
+                <input
+                    type='email'
+                    name='estudiante_correo'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Escuela de procedencia:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_escuela'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Carrera:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_carrera'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Promedio de calificaciones (último ciclo escolar):</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name='estudiante_promedio'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Contacto de la escuela:</label>
-                <input type='number' name='' required />
+                <input
+                    type='number'
+                    name='estudiante_contacto_escuela'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Fotografía tamaño infantil a color o blanco y negro:</label>
-                <input type='file' name='' required />
+                <input
+                    type='file'
+                    name='estudiante_fotografia'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Certificado de vacunación (COVID, varicela, influenza):</label>
-                <input type='file' name='' required />
+                <input
+                    type='file'
+                    name='estudiante_certificado_vacunacion'
+                    required
+                    onChange={onChange}
+                />
             </div>
             {
                 id !== 'servicio-social' ? null
@@ -123,17 +252,141 @@ const SocialServiceForm = ({ id }) => {
                             <label>
                                 Copia de calificaciones de la carrera con sello original de la escuela (promedio mayor a 8.0):
                             </label>
-                            <input type='file' name='' required />
+                            <input
+                                type='file'
+                                name='estudiante_copia_calificaciones'
+                                required
+                                onChange={onChange}
+                            />
                         </div>
                         <div>
                             <label>
                                 Oficio de la escuela donde procede, solicitando llevar a cabo su servicio social:
                             </label>
-                            <input type='file' name='' required />
+                            <input
+                                type='file'
+                                name='estudiante_oficio_escuela'
+                                required
+                                onChange={onChange}
+                            />
                         </div>
                         <div>
                             <label>Certificado médico de salud reciente (IMSS, ISSSTE, SSA, Cruz Roja, DIF), no se aceptan médicos, clínicas, hospitales particulares ni similares:</label>
-                            <input type='file' name='' required />
+                            <input
+                                type='file'
+                                name='estudiante_certificado_medico'
+                                required
+                                onChange={onChange}
+                            />
+                        </div>
+                    </>
+            }
+            <div>
+                <button className={styles.successButton}>
+                    Registrar
+                </button>
+                <button className={styles.deleteButton} type='reset' onClick={onReset}>
+                    Eliminar campos
+                </button>
+            </div>
+        </form>
+    )
+}
+
+const InternShipForm = ({ id }) => {
+    return (
+        <form className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}>
+            <div>
+                <label>Nombre:</label>
+                <input type='text' name='estudiante_nombre' required />
+            </div>
+            <div>
+                <label>Nacionalidad:</label>
+                <input type='text' name='estudiante_nacionalidad' required />
+            </div>
+            <div>
+                <label>Fecha de nacimiento:</label>
+                <input type='date' name='estudiante_fecha_nacimiento' required />
+            </div>
+            <div>
+                <label>CURP:</label>
+                <input type='text' name='estudiante_curp' required />
+            </div>
+            <div>
+                <label>Especialidad:</label>
+                <input type='text' name='estudiante_especialidad' required />
+            </div>
+            <div>
+                <label>Grado:</label>
+                <input type='text' name='estudiante_grado' required />
+            </div>
+            <div>
+                <label>Institución procedente:</label>
+                <input type='text' name='estudiante_institucion_procedencia' required />
+            </div>
+            <div>
+                <label>Teléfono y extensión de la jefatura de enseñanza:</label>
+                <input type='text' name='estudiante_extension_ensenanza' required />
+            </div>
+            <div>
+                <label>Fecha de inicio de rotación:</label>
+                <input type='date' name='estudiante_fecha_inicio' required />
+            </div>
+            <div>
+                <label>Fecha de término de rotación:</label>
+                <input type='date' name='estudiante_fecha_termino' required />
+            </div>
+            <div>
+                <label>Servicio al que va rotar:</label>
+                <input type='text' name='' required />
+            </div>
+            <div>
+                <label>Teléfono celular:</label>
+                <input type='number' name='estudiante_telefono_celular' required />
+            </div>
+            <div>
+                <label>Teléfono local:</label>
+                <input type='number' name='estudiante_telefono_particular' required />
+            </div>
+            <div>
+                <label>Domicilio permanente:</label>
+                <input type='text' name='estudiante_domicilio_permanente' required />
+            </div>
+            <div>
+                <label>Correo electrónico:</label>
+                <input type='email' name='estudiante_correo' required />
+            </div>
+            <div>
+                <label>Nombre de algún familiar (contacto de emergencia):</label>
+                <input type='text' name='estudiante_familiar_nombre' required />
+            </div>
+            <div>
+                <label>Teléfono de contacto de emergencia:</label>
+                <input type='number' name='estudiante_familiar_telefono' required />
+            </div>
+            <div>
+                <label>Fotografía tamaño infantil a color o blanco y negro:</label>
+                <input type='file' name='estudiante_fotografia' required />
+            </div>
+            <div>
+                <label>Certificado de vacunación (COVID, varicela, influenza):</label>
+                <input type='file' name='estudiante_certificado_vacunacion' required />
+            </div>
+            {
+                id !== 'pregrado' ? null
+                    :
+                    <>
+                        <div>
+                            <label>Grupo:</label>
+                            <input type='text' name='estudiante_grupo' required />
+                        </div>
+                        <div>
+                            <label>Tutor:</label>
+                            <input type='text' name='estudiante_tutor' required />
+                        </div>
+                        <div>
+                            <label>Materia:</label>
+                            <input type='text' name='estudiante_materia' required />
                         </div>
                     </>
             }
@@ -149,111 +402,52 @@ const SocialServiceForm = ({ id }) => {
     )
 }
 
-const InternShipForm = ({ id }) => {
-    return (
-        <form className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}>
-            <div>
-                <label>Nombre:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Nacionalidad:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Fecha de nacimiento:</label>
-                <input type='date' name='' required />
-            </div>
-            <div>
-                <label>CURP:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Especialidad:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Grado:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Institución procedente:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Teléfono y extensión de la jefatura de enseñanza:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Fecha de inicio de rotación:</label>
-                <input type='date' name='' required />
-            </div>
-            <div>
-                <label>Fecha de término de rotación:</label>
-                <input type='date' name='' required />
-            </div>
-            <div>
-                <label>Servicio al que va rotar:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Teléfono celular:</label>
-                <input type='number' name='' required />
-            </div>
-            <div>
-                <label>Teléfono local:</label>
-                <input type='number' name='' required />
-            </div>
-            <div>
-                <label>Domicilio permanente:</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Correo electrónico:</label>
-                <input type='email' name='' required />
-            </div>
-            <div>
-                <label>Nombre de algún familiar (contacto de emergencia):</label>
-                <input type='text' name='' required />
-            </div>
-            <div>
-                <label>Teléfono de contacto de emergencia:</label>
-                <input type='number' name='' required />
-            </div>
-            <div>
-                <label>Fotografía tamaño infantil a color o blanco y negro:</label>
-                <input type='file' name='' required />
-            </div>
-            <div>
-                <label>Certificado de vacunación (COVID, varicela, influenza):</label>
-                <input type='file' name='' required />
-            </div>
-            {
-                id !== 'pregrado' ? null
-                    :
-                    <>
-                        <div>
-                            <label>Grupo:</label>
-                            <input type='text' name='' required />
-                        </div>
-                        <div>
-                            <label>Tutor:</label>
-                            <input type='text' name='' required />
-                        </div>
-                        <div>
-                            <label>Materia:</label>
-                            <input type='text' name='' required />
-                        </div>
-                    </>
+const onSubmit = async (evt, { data }) => {
+    evt.preventDefault();
+
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value);
+    });
+
+    try {
+        const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_LOCAL_API}/inscriptions/addNewInscription/index.php`,
+            formData
+        )
+        if (response.status !== 200) {
+            return Swal.fire({
+                title: '¡Algo ha ocurrido mal, intente nuevamente!',
+                icon: 'error',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        }
+        return Swal.fire({
+            title: response.data.message,
+            icon: 'success',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
             }
-            <div>
-                <button className={styles.successButton}>
-                    Registrar
-                </button>
-                <button className={styles.deleteButton} type='reset'>
-                    Eliminar campos
-                </button>
-            </div>
-        </form>
-    )
+        });
+    } catch (error) {
+        return Swal.fire({
+            title: '¡Algo ha ocurrido mal, intente nuevamente!',
+            icon: 'error',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    }
 }
