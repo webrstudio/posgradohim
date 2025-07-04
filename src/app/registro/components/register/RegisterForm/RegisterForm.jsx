@@ -6,9 +6,9 @@ export const RegisterForm = ({ id }) => {
             <SocialServiceForm id={id} />
         )
     }
-    if (id === 'medicos-rotantes-internos-pregrado') {
+    if (id === 'medicos-rotantes-internos-pregrado' || id === 'pregrado') {
         return (
-            <InternShipForm />
+            <InternShipForm id={id} />
         )
     }
 }
@@ -50,6 +50,10 @@ const SocialServiceForm = ({ id }) => {
             <div>
                 <label>Fecha de nacimiento:</label>
                 <input type='date' name='' required />
+            </div>
+            <div>
+                <label>CURP:</label>
+                <input type='text' name='' required />
             </div>
             <div>
                 <label>Domicilio donde radica en la ciudad:</label>
@@ -108,7 +112,7 @@ const SocialServiceForm = ({ id }) => {
                 <input type='file' name='' required />
             </div>
             <div>
-                <label>Certificado de vacunación (COVID, viruela, influenza):</label>
+                <label>Certificado de vacunación (COVID, varicela, influenza):</label>
                 <input type='file' name='' required />
             </div>
             {
@@ -127,6 +131,10 @@ const SocialServiceForm = ({ id }) => {
                             </label>
                             <input type='file' name='' required />
                         </div>
+                        <div>
+                            <label>Certificado médico de salud reciente (IMSS, ISSSTE, SSA, Cruz Roja, DIF), no se aceptan médicos, clínicas, hospitales particulares ni similares:</label>
+                            <input type='file' name='' required />
+                        </div>
                     </>
             }
             <div>
@@ -141,13 +149,9 @@ const SocialServiceForm = ({ id }) => {
     )
 }
 
-const InternShipForm = () => {
+const InternShipForm = ({ id }) => {
     return (
         <form className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}>
-            <div>
-                <label>Fecha:</label>
-                <input type='date' name='' required />
-            </div>
             <div>
                 <label>Nombre:</label>
                 <input type='text' name='' required />
@@ -159,6 +163,10 @@ const InternShipForm = () => {
             <div>
                 <label>Fecha de nacimiento:</label>
                 <input type='date' name='' required />
+            </div>
+            <div>
+                <label>CURP:</label>
+                <input type='text' name='' required />
             </div>
             <div>
                 <label>Especialidad:</label>
@@ -216,6 +224,28 @@ const InternShipForm = () => {
                 <label>Fotografía tamaño infantil a color o blanco y negro:</label>
                 <input type='file' name='' required />
             </div>
+            <div>
+                <label>Certificado de vacunación (COVID, varicela, influenza):</label>
+                <input type='file' name='' required />
+            </div>
+            {
+                id !== 'pregrado' ? null
+                    :
+                    <>
+                        <div>
+                            <label>Grupo:</label>
+                            <input type='text' name='' required />
+                        </div>
+                        <div>
+                            <label>Tutor:</label>
+                            <input type='text' name='' required />
+                        </div>
+                        <div>
+                            <label>Materia:</label>
+                            <input type='text' name='' required />
+                        </div>
+                    </>
+            }
             <div>
                 <button className={styles.successButton}>
                     Registrar

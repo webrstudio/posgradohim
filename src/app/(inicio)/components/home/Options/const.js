@@ -11,4 +11,8 @@ export const options = [
         title:'Registro para médicos internos de pregrado',
         link:'/registro/medicos-rotantes-internos-pregrado'
     },
+    {
+        title:'Registro para pregrado',
+        link:'/registro/pregrado'
+    }
 ]
