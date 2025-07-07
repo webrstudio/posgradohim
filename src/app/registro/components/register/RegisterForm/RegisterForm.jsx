@@ -294,83 +294,187 @@ const SocialServiceForm = ({ id }) => {
 }
 
 const InternShipForm = ({ id }) => {
+    const { data, onChange, onReset } = useOnChange()
     return (
-        <form className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}>
+        <form
+            className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}
+            onSubmit={(e) => onSubmit(e, {
+                data: {
+                    ...data,
+                    categoria_id: id === 'medicos-rotantes-internos-pregrado' ? 3 : 4
+                }
+            })}
+        >
             <div>
                 <label>Nombre:</label>
-                <input type='text' name='estudiante_nombre' required />
+                <input
+                    type='text'
+                    name='estudiante_nombre'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Nacionalidad:</label>
-                <input type='text' name='estudiante_nacionalidad' required />
+                <input
+                    type='text'
+                    name='estudiante_nacionalidad'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Fecha de nacimiento:</label>
-                <input type='date' name='estudiante_fecha_nacimiento' required />
+                <input
+                    type='date'
+                    name='estudiante_fecha_nacimiento'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>CURP:</label>
-                <input type='text' name='estudiante_curp' required />
+                <input
+                    type='text'
+                    name='estudiante_curp'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Especialidad:</label>
-                <input type='text' name='estudiante_especialidad' required />
+                <input
+                    type='text'
+                    name='estudiante_especialidad'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Grado:</label>
-                <input type='text' name='estudiante_grado' required />
+                <input
+                    type='text'
+                    name='estudiante_grado'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Institución procedente:</label>
-                <input type='text' name='estudiante_institucion_procedencia' required />
+                <input
+                    type='text'
+                    name='estudiante_institucion_procedencia'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Teléfono y extensión de la jefatura de enseñanza:</label>
-                <input type='text' name='estudiante_extension_ensenanza' required />
+                <input
+                    type='text'
+                    name='estudiante_extension_ensenanza'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Fecha de inicio de rotación:</label>
-                <input type='date' name='estudiante_fecha_inicio' required />
+                <input
+                    type='date'
+                    name='estudiante_fecha_inicio'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Fecha de término de rotación:</label>
-                <input type='date' name='estudiante_fecha_termino' required />
+                <input
+                    type='date'
+                    name='estudiante_fecha_termino'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Servicio al que va rotar:</label>
-                <input type='text' name='' required />
+                <input
+                    type='text'
+                    name=''
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Teléfono celular:</label>
-                <input type='number' name='estudiante_telefono_celular' required />
+                <input
+                    type='number'
+                    name='estudiante_telefono_celular'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Teléfono local:</label>
-                <input type='number' name='estudiante_telefono_particular' required />
+                <input
+                    type='number'
+                    name='estudiante_telefono_particular'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Domicilio permanente:</label>
-                <input type='text' name='estudiante_domicilio_permanente' required />
+                <input
+                    type='text'
+                    name='estudiante_domicilio_permanente'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Correo electrónico:</label>
-                <input type='email' name='estudiante_correo' required />
+                <input
+                    type='email'
+                    name='estudiante_correo'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Nombre de algún familiar (contacto de emergencia):</label>
-                <input type='text' name='estudiante_familiar_nombre' required />
+                <input
+                    type='text'
+                    name='estudiante_familiar_nombre'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Teléfono de contacto de emergencia:</label>
-                <input type='number' name='estudiante_familiar_telefono' required />
+                <input
+                    type='number'
+                    name='estudiante_familiar_telefono'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Fotografía tamaño infantil a color o blanco y negro:</label>
-                <input type='file' name='estudiante_fotografia' required />
+                <input
+                    type='file'
+                    name='estudiante_fotografia'
+                    required
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <label>Certificado de vacunación (COVID, varicela, influenza):</label>
-                <input type='file' name='estudiante_certificado_vacunacion' required />
+                <input
+                    type='file'
+                    name='estudiante_certificado_vacunacion'
+                    required
+                    onChange={onChange}
+                />
             </div>
             {
                 id !== 'pregrado' ? null
@@ -378,15 +482,30 @@ const InternShipForm = ({ id }) => {
                     <>
                         <div>
                             <label>Grupo:</label>
-                            <input type='text' name='estudiante_grupo' required />
+                            <input
+                                type='text'
+                                name='estudiante_grupo'
+                                required
+                                onChange={onChange}
+                            />
                         </div>
                         <div>
                             <label>Tutor:</label>
-                            <input type='text' name='estudiante_tutor' required />
+                            <input
+                                type='text'
+                                name='estudiante_tutor'
+                                required
+                                onChange={onChange}
+                            />
                         </div>
                         <div>
                             <label>Materia:</label>
-                            <input type='text' name='estudiante_materia' required />
+                            <input
+                                type='text'
+                                name='estudiante_materia'
+                                required
+                                onChange={onChange}
+                            />
                         </div>
                     </>
             }
@@ -394,7 +513,7 @@ const InternShipForm = ({ id }) => {
                 <button className={styles.successButton}>
                     Registrar
                 </button>
-                <button className={styles.deleteButton} type='reset'>
+                <button className={styles.deleteButton} type='reset' onClick={onReset}>
                     Eliminar campos
                 </button>
             </div>
