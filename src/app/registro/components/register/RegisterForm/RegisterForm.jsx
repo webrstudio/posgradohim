@@ -399,7 +399,7 @@ const InternShipForm = ({ id }) => {
                 <label>Servicio al que va rotar:</label>
                 <input
                     type='text'
-                    name=''
+                    name='estudiante_departamento'
                     required
                     onChange={onChange}
                 />
