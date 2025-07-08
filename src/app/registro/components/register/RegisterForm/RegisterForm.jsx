@@ -77,7 +77,8 @@ const SocialServiceForm = ({ id }) => {
             </div>
             <div>
                 <label>Sexo:</label>
-                <select name='estudiante_genero' onChange={onChange}>
+                <select name='estudiante_genero' onChange={onChange} required>
+                    <option value=''>Seleccione una opción</option>
                     <option value='Hombre'>Hombre</option>
                     <option value='Mujer'>Mujer</option>
                 </select>
