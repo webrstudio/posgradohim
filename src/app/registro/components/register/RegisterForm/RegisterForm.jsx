@@ -199,6 +199,24 @@ const SocialServiceForm = ({ id }) => {
                                 onChange={onChange}
                             />
                         </div>
+                        {
+                            id !== 'estancias-estadias-tesis-practicas-rotantes' ? null
+                                :
+                                <>
+                                    <div>
+                                        <label>Motivo de registro:</label>
+                                        <select name='categoria_nombre' onChange={onChange} required>
+                                            <option value=''>Seleccione una opción</option>
+                                            <option value='Estancias'>Estancias</option>
+                                            <option value='Estadías'>Estadías</option>
+                                            <option value='Tesis'>Tesis</option>
+                                            <option value='Prácticas'>Prácticas</option>
+                                            <option value='Rotantes'>Rotantes</option>
+                                            <option value='Verano de investigación'>Verano de investigación</option>
+                                        </select>
+                                    </div>
+                                </>
+                        }
                         <div>
                             <label>Escuela de procedencia:</label>
                             <input
@@ -556,7 +574,7 @@ const onSubmit = async (evt, { data, onLoading, onReset }) => {
 
     try {
         const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_LOCAL_API}/inscriptions/addNewInscription/index.php`,
+            `${process.env.NEXT_PUBLIC_API}/inscriptions/addNewInscription/index.php`,
             formData
         )
         if (response.status !== 200) {
