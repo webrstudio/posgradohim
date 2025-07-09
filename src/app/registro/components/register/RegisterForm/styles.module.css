@@ -34,3 +34,11 @@
   background: var(--red-primary);
   color:var(--white-primary);  
 }
+@media (min-width:240px) and (max-width:990px){
+    .registerFormWrapper{
+        grid-template-columns: 1fr;
+    }
+    .registerFormWrapper div{
+        flex-direction: column;
+    }
+}
