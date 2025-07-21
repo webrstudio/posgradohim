@@ -566,7 +566,7 @@ const onSubmit = async (evt, { data, onLoading, onReset }) => {
 
     try {
         const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_LOCAL_API}/inscriptions/addNewInscription/index.php`,
+            `${process.env.NEXT_PUBLIC_API}/inscriptions/addNewInscription/index.php`,
             formData,
             {
                 headers: {
