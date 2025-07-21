@@ -1,9 +1,7 @@
 import styles from './styles.module.css'
 
-export const Loader = ()=>{
+export const Loader = () => {
     return (
-        <section className={styles.loaderWrapper}>
-            <div className={styles.loader}></div>
-        </section>
+        <section className={styles.loaderWrapper}></section>
     )
 }
