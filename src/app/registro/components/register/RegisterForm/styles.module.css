@@ -34,6 +34,18 @@
   background: var(--red-primary);
   color:var(--white-primary);  
 }
+.codeFormWrapper{
+    display:flex;
+    flex-direction: column;
+    gap:1.5rem;
+    padding:1rem;
+}
+.codeFormWrapper button{
+    border:none;
+    cursor:pointer;
+    padding:0.5rem;
+    width:100%;
+}
 @media (min-width:240px) and (max-width:990px){
     .registerFormWrapper{
         grid-template-columns: 1fr;

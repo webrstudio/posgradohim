@@ -2,21 +2,71 @@
 import 'animate.css'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { useState } from 'react'
 import { useOnChange } from '@/hooks'
 import styles from './styles.module.css'
 import { Loader } from '../Loader/Loader'
 
 export const RegisterForm = ({ id }) => {
-    if (id === 'servicio-social' || id === 'estancias-estadias-tesis-practicas-rotantes') {
-        return (
-            <SocialServiceForm id={id} />
-        )
+    const { data, onChange, onLoading, isLoading } = useOnChange()
+    const [password, setPassword] = useState(false)
+    const onSubmit = async (evt) => {
+        evt.preventDefault()
+        if (onLoading) onLoading(true);
+        console.log(data)
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_API}/inscriptions/inscriptionLogin/index.php`,
+                data
+            )
+            console.log(response)
+            if(response.status===200){
+                setPassword(true)
+            }
+        } catch (error) {
+            setPassword(false)
+        } finally {
+            if (onLoading) onLoading(false);
+        }
     }
-    if (id === 'medicos-rotantes-internos-pregrado' || id === 'pregrado') {
-        return (
-            <InternShipForm id={id} />
-        )
-    }
+    return (
+        <>
+            {isLoading && <Loader />}
+            {
+                !isLoading && password ?
+                    <>
+                        {
+                            id === 'servicio-social' || id === 'estancias-estadias-tesis-practicas-rotantes' ?
+                                <SocialServiceForm id={id} />
+                                :
+                                null
+                        }
+                        {
+                            id === 'medicos-rotantes-internos-pregrado' || id === 'pregrado' ?
+                                <InternShipForm id={id} />
+                                :
+                                null
+                        }
+                    </>
+                    :
+                    <form
+                        onSubmit={onSubmit}
+                        className={`${styles.codeFormWrapper} boxShadow borderRadius smallContainer`}
+                    >
+                        <span>Ingrese el código de acceso:</span>
+                        <input
+                            type='password'
+                            required
+                            name='codigo_acceso'
+                            onChange={onChange}
+                        />
+                        <button className={styles.successButton}>
+                            Ingresar
+                        </button>
+                    </form>
+            }
+        </>
+    )
 }
 
 const SocialServiceForm = ({ id }) => {
