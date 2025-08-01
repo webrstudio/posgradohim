@@ -20,7 +20,7 @@ export const RegisterForm = ({ id }) => {
                 data
             )
             console.log(response)
-            if(response.status===200){
+            if (response.status === 200) {
                 setPassword(true)
             }
         } catch (error) {
@@ -44,6 +44,12 @@ export const RegisterForm = ({ id }) => {
                         {
                             id === 'medicos-rotantes-internos-pregrado' || id === 'pregrado' ?
                                 <InternShipForm id={id} />
+                                :
+                                null
+                        }
+                        {
+                            id === 'credencial' ?
+                                <CredentialForm id={id} />
                                 :
                                 null
                         }
@@ -268,12 +274,13 @@ const SocialServiceForm = ({ id }) => {
                 }
                 <div>
                     <label>Escuela de procedencia:</label>
-                    <input
-                        type='text'
-                        name='estudiante_escuela'
-                        required
-                        onChange={onChange}
-                    />
+                    <select name='estudiante_escuela' onChange={onChange} required>
+                        <option value=''>Seleccione una opción</option>
+                        <option value='UNAM'>UNAM</option>
+                        <option value='IPN'>IPN</option>
+                        <option value='Universidad La Salle'>Universidad La Salle</option>
+                        <option value='UAM'>UAM</option>
+                    </select>
                 </div>
                 <div>
                     <label>Carrera:</label>
@@ -422,19 +429,23 @@ const InternShipForm = ({ id }) => {
                         onChange={onChange}
                     />
                 </div>
+                {
+                    id !== 'pregrado' ? null
+                        :
+                        <div>
+                            <label>Especialidad:</label>
+                            <input
+                                type='text'
+                                name='estudiante_especialidad'
+                                required
+                                onChange={onChange}
+                            />
+                        </div>
+                }
                 <div>
-                    <label>Especialidad:</label>
+                    <label>{id!=='pregrado' ? 'Grado:' : 'Semestre cursado'}</label>
                     <input
-                        type='text'
-                        name='estudiante_especialidad'
-                        required
-                        onChange={onChange}
-                    />
-                </div>
-                <div>
-                    <label>Grado:</label>
-                    <input
-                        type='text'
+                        type={id!=='pregrado' ? 'text' : 'number'}
                         name='estudiante_grado'
                         required
                         onChange={onChange}
@@ -603,6 +614,194 @@ const InternShipForm = ({ id }) => {
     )
 }
 
+const CredentialForm = ({ id }) => {
+    const { data, onChange, onReset, onLoading, isLoading } = useOnChange()
+    return (
+        <>
+            {isLoading && <Loader />}
+            <form
+                className={`${styles.registerFormWrapper} largeContainer boxShadow borderRadius`}
+                onSubmit={(e) => onSubmit(e, {
+                    data: {
+                        ...data,
+                        categoria_id: id === 'servicio-social' ? 2 : 1,
+                        onLoading: onLoading,
+                        onReset: onReset
+                    },
+                    onLoading: onLoading,
+                    onReset: onReset
+                })}
+            >
+                <div>
+                    <label>Nombre:</label>
+                    <input
+                        type='text'
+                        name='estudiante_nombre'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Fecha de inicio:</label>
+                    <input
+                        type='date'
+                        name='estudiante_fecha_inicio'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Fecha de término:</label>
+                    <input
+                        type='date'
+                        name='estudiante_fecha_termino'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Procedencia:</label>
+                    <input
+                        type='text'
+                        name='estudiante_escuela'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Carrera:</label>
+                    <input
+                        type='text'
+                        name='estudiante_carrera'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Área asignada:</label>
+                    <input
+                        type='text'
+                        name='estudiante_departamento'
+                        onChange={onChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Fecha de nacimiento:</label>
+                    <input
+                        type='date'
+                        name='estudiante_fecha_nacimiento'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Teléfono celular:</label>
+                    <input
+                        type='number'
+                        name='estudiante_telefono_celular'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Actividad:</label>
+                    <select name='categoria_nombre' onChange={onChange} required>
+                        <option value=''>Seleccione una opción</option>
+                        <option value='Pregrado'>Pregrado</option>
+                        <option value='Servicio social'>Servicio social</option>
+                        <option value='Practicante'>Practicante</option>
+                        <option value='Rotante'>Rotante</option>
+                        <option value='Tesista'>Tesista</option>
+                        <option value='Verano de investigación'>Verano de investigación</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Promedio de calificaciones (último ciclo escolar):</label>
+                    <input
+                        type='text'
+                        name='estudiante_promedio'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Contacto de la escuela:</label>
+                    <input
+                        type='number'
+                        name='estudiante_contacto_escuela'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Fotografía tamaño infantil a color o blanco y negro (únicamente archivos con extensión .jpg, .jpeg, .png):</label>
+                    <input
+                        type='file'
+                        name='estudiante_fotografia'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                <div>
+                    <label>Certificado de vacunación (COVID, varicela, influenza) (únicamente archivos con extensión .pdf):</label>
+                    <input
+                        type='file'
+                        name='estudiante_certificado_vacunacion'
+                        required
+                        onChange={onChange}
+                    />
+                </div>
+                {
+                    id !== 'servicio-social' ? null
+                        :
+                        <>
+                            <div>
+                                <label>
+                                    Copia de calificaciones de la carrera con sello original de la escuela (promedio mayor a 8.0) (únicamente archivos con extensión .pdf):
+                                </label>
+                                <input
+                                    type='file'
+                                    name='estudiante_copia_calificaciones'
+                                    required
+                                    onChange={onChange}
+                                />
+                            </div>
+                            <div>
+                                <label>
+                                    Oficio de la escuela donde procede, solicitando llevar a cabo su servicio social (únicamente archivos con extensión .pdf):
+                                </label>
+                                <input
+                                    type='file'
+                                    name='estudiante_oficio_escuela'
+                                    required
+                                    onChange={onChange}
+                                />
+                            </div>
+                            <div>
+                                <label>Certificado médico de salud reciente (IMSS, ISSSTE, SSA, Cruz Roja, DIF), no se aceptan médicos, clínicas, hospitales particulares ni similares (únicamente archivos con extensión .pdf):</label>
+                                <input
+                                    type='file'
+                                    name='estudiante_certificado_medico'
+                                    required
+                                    onChange={onChange}
+                                />
+                            </div>
+                        </>
+                }
+                <div>
+                    <button className={styles.successButton}>
+                        Registrar
+                    </button>
+                    <button className={styles.deleteButton} type='reset' onClick={onReset}>
+                        Eliminar campos
+                    </button>
+                </div>
+            </form>
+        </>
+    )
+}
+
 const onSubmit = async (evt, { data, onLoading, onReset }) => {
     evt.preventDefault();
 
@@ -616,7 +815,7 @@ const onSubmit = async (evt, { data, onLoading, onReset }) => {
 
     try {
         const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_API}/inscriptions/addNewInscription/index.php`,
+            `${process.env.NEXT_PUBLIC_LOCAL_API}/inscriptions/addNewInscription/index.php`,
             formData,
             {
                 headers: {

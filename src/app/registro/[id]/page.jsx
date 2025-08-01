@@ -15,7 +15,8 @@ export async function generateStaticParams() {
     { id: "servicio-social" },
     { id: "estancias-estadias-tesis-practicas-rotantes" },
     { id: "medicos-rotantes-internos-pregrado"},
-    { id: "pregrado"}
+    { id: "pregrado"},
+    { id: 'credencial' }
   ];
 }
 
