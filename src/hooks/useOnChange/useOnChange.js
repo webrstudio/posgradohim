@@ -10,9 +10,15 @@ export const useOnChange = () => {
             [name]: type === "file" ? files[0] : value,
         }));
     };
-    const onLoading = (value)=>{
+    const onSelectOption = (name, value) => {
+        setData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+    const onLoading = (value) => {
         setIsLoading(value)
     }
-    const onReset = () => setData({}) 
-    return { data, onChange, onReset, onLoading, isLoading }
+    const onReset = () => setData({})
+    return { data, onChange, onReset, onLoading, isLoading, onSelectOption }
 }

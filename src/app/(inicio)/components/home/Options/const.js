@@ -15,8 +15,8 @@ export const options = [
         title:'Registro para pregrado',
         link:'/registro/pregrado'
     },
-    {
+    /*{
         title:'Genera tu credencial aquí',
         link:'/registro/credencial'
-    }
+    }*/
 ]

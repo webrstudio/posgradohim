@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { useOnChange } from '@/hooks'
 import styles from './styles.module.css'
 import { Loader } from '../Loader/Loader'
+import '@szhsin/react-menu/dist/index.css';
+import { Menu, MenuItem, MenuButton, MenuHeader } from '@szhsin/react-menu';
 
 export const RegisterForm = ({ id }) => {
     const { data, onChange, onLoading, isLoading } = useOnChange()
@@ -76,7 +78,7 @@ export const RegisterForm = ({ id }) => {
 }
 
 const SocialServiceForm = ({ id }) => {
-    const { data, onChange, onReset, onLoading, isLoading } = useOnChange()
+    const { data, onChange, onReset, onLoading, isLoading, onSelectOption } = useOnChange()
     return (
         <>
             {isLoading && <Loader />}
@@ -139,12 +141,17 @@ const SocialServiceForm = ({ id }) => {
                     />
                 </div>
                 <div>
-                    <label>Sexo:</label>
-                    <select name='estudiante_genero' onChange={onChange} required>
-                        <option value=''>Seleccione una opción</option>
-                        <option value='Hombre'>Hombre</option>
-                        <option value='Mujer'>Mujer</option>
-                    </select>
+                    <label>Género:</label>
+                    <Menu
+                        menuButton={
+                            <MenuButton>
+                                {data.estudiante_genero || 'Seleccione una opción'}
+                            </MenuButton>
+                        }
+                    >
+                        <MenuItem onClick={() => onSelectOption('estudiante_genero', 'Hombre')}>Hombre</MenuItem>
+                        <MenuItem onClick={() => onSelectOption('estudiante_genero', 'Mujer')}>Mujer</MenuItem>
+                    </Menu>
                 </div>
                 <div>
                     <label>Estado civil:</label>
@@ -274,13 +281,33 @@ const SocialServiceForm = ({ id }) => {
                 }
                 <div>
                     <label>Escuela de procedencia:</label>
-                    <select name='estudiante_escuela' onChange={onChange} required>
-                        <option value=''>Seleccione una opción</option>
-                        <option value='UNAM'>UNAM</option>
-                        <option value='IPN'>IPN</option>
-                        <option value='Universidad La Salle'>Universidad La Salle</option>
-                        <option value='UAM'>UAM</option>
-                    </select>
+                    <Menu
+                        menuButton={
+                            <MenuButton>
+                                {data.estudiante_escuela || 'Seleccione una opción'}
+                            </MenuButton>
+                        }
+                    >
+                        <MenuItem onClick={() => onSelectOption('estudiante_escuela', 'UNAM')}>UNAM</MenuItem>
+                        <MenuItem onClick={() => onSelectOption('estudiante_escuela', 'UAM')}>UAM</MenuItem>
+                        <MenuItem onClick={() => onSelectOption('estudiante_escuela', 'IPN')}>IPN</MenuItem>
+                        <MenuItem onClick={() => onSelectOption('estudiante_escuela', 'La Salle')}>La Salle</MenuItem>
+                        <MenuHeader>
+                            <label>Otro:</label>
+                            <input
+                                type="text"
+                                name="estudiante_escuela"
+                                value={
+                                    ['UNAM', 'UAM', 'IPN', 'La Salle'].includes(data.estudiante_escuela)
+                                        ? ''
+                                        : data.estudiante_escuela || ''
+                                }
+                                onClick={(e) => e.stopPropagation()}
+                                onChange={onChange}
+                                placeholder="Escriba otra escuela"
+                            />
+                        </MenuHeader>
+                    </Menu>
                 </div>
                 <div>
                     <label>Carrera:</label>
@@ -443,9 +470,9 @@ const InternShipForm = ({ id }) => {
                         </div>
                 }
                 <div>
-                    <label>{id!=='pregrado' ? 'Grado:' : 'Semestre cursado'}</label>
+                    <label>{id !== 'pregrado' ? 'Grado:' : 'Semestre cursado'}</label>
                     <input
-                        type={id!=='pregrado' ? 'text' : 'number'}
+                        type={id !== 'pregrado' ? 'text' : 'number'}
                         name='estudiante_grado'
                         required
                         onChange={onChange}
@@ -713,26 +740,8 @@ const CredentialForm = ({ id }) => {
                         <option value='Practicante'>Practicante</option>
                         <option value='Rotante'>Rotante</option>
                         <option value='Tesista'>Tesista</option>
-                        <option value='Verano de investigación'>Verano de investigación</option>
+                        <option value='Visitante'>Visitante</option>
                     </select>
-                </div>
-                <div>
-                    <label>Promedio de calificaciones (último ciclo escolar):</label>
-                    <input
-                        type='text'
-                        name='estudiante_promedio'
-                        required
-                        onChange={onChange}
-                    />
-                </div>
-                <div>
-                    <label>Contacto de la escuela:</label>
-                    <input
-                        type='number'
-                        name='estudiante_contacto_escuela'
-                        required
-                        onChange={onChange}
-                    />
                 </div>
                 <div>
                     <label>Fotografía tamaño infantil a color o blanco y negro (únicamente archivos con extensión .jpg, .jpeg, .png):</label>
@@ -743,52 +752,6 @@ const CredentialForm = ({ id }) => {
                         onChange={onChange}
                     />
                 </div>
-                <div>
-                    <label>Certificado de vacunación (COVID, varicela, influenza) (únicamente archivos con extensión .pdf):</label>
-                    <input
-                        type='file'
-                        name='estudiante_certificado_vacunacion'
-                        required
-                        onChange={onChange}
-                    />
-                </div>
-                {
-                    id !== 'servicio-social' ? null
-                        :
-                        <>
-                            <div>
-                                <label>
-                                    Copia de calificaciones de la carrera con sello original de la escuela (promedio mayor a 8.0) (únicamente archivos con extensión .pdf):
-                                </label>
-                                <input
-                                    type='file'
-                                    name='estudiante_copia_calificaciones'
-                                    required
-                                    onChange={onChange}
-                                />
-                            </div>
-                            <div>
-                                <label>
-                                    Oficio de la escuela donde procede, solicitando llevar a cabo su servicio social (únicamente archivos con extensión .pdf):
-                                </label>
-                                <input
-                                    type='file'
-                                    name='estudiante_oficio_escuela'
-                                    required
-                                    onChange={onChange}
-                                />
-                            </div>
-                            <div>
-                                <label>Certificado médico de salud reciente (IMSS, ISSSTE, SSA, Cruz Roja, DIF), no se aceptan médicos, clínicas, hospitales particulares ni similares (únicamente archivos con extensión .pdf):</label>
-                                <input
-                                    type='file'
-                                    name='estudiante_certificado_medico'
-                                    required
-                                    onChange={onChange}
-                                />
-                            </div>
-                        </>
-                }
                 <div>
                     <button className={styles.successButton}>
                         Registrar
